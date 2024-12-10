@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.anuouan</groupId>
-    <artifactId>springboot-thymeleaf</artifactId>
+    <artifactId>springboot-knife4j</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot-thymeleaf</name>
-    <description>springboot-thymeleaf</description>
+    <name>springboot-knife4j</name>
+    <description>springboot-knife4j</description>
     <url/>
     <licenses>
         <license/>
@@ -32,16 +32,9 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
