@@ -1,0 +1,68 @@
+server:
+  port: 8400
+
+dromara:
+  x-file-storage: #文件存储配置
+    default-platform: minio #默认使用的存储平台
+#    thumbnail-suffix: ".min.jpg" #缩略图后缀，例如【.min.jpg】【.png】
+#    多个平台配置
+#    aliyun-oss:
+#      - platform: aliyun-oss-1 # 存储平台标识
+#        enable-storage: true  # 启用存储
+#        access-key: ??
+#        secret-key: ??
+#        end-point: ??
+#        bucket-name: ??
+#        domain: ?? # 访问域名，注意“/”结尾，例如：https://abc.oss-cn-shanghai.aliyuncs.com/
+#        base-path: test/ # 基础路径
+    minio:
+      - platform: minio # 存储平台标识
+        enable-storage: true  # 启用存储
+        access-key: aCUjNqdJfFdgi20ZHkKH
+        secret-key: quFIlrQKjMJ0LiTAN5JACwsfmWy8gCZHfiMEaQqH
+        end-point: http://localhost:9000
+        bucket-name: demo
+#        domain:  # 访问域名，注意“/”结尾，例如：http://minio.abc.com/abc/
+#        base-path: test/ # 基础路径
+spring:
+  mvc:
+    static-path-pattern: /static/**
+  web:
+    resources:
+      static-locations: classpath:/static/
+
+
+  #  servlet:
+#    multipart:
+#      resolve-lazily: true
+  application:
+    name: springboot-thymeleaf
+
+    #mybatis:配置数据库
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root  #数据库名、用户名和密码改为自己的
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # THYMELEAF (ThymeleafAutoConfiguration)
+    # 开启模板缓存（默认值： true ）
+  thymeleaf:
+    cache: false
+    # 检查模板是否存在，然后再呈现
+    check-template: true
+    # 检查模板位置是否正确（默认值 :true ）
+    check-template-location: true
+    #Content-Type 的值（默认值： text/html ）
+    content-type: text/html
+    # 开启 MVC Thymeleaf 视图解析（默认值： true ）
+    enabled: true
+    # 模板编码
+    encoding: UTF-8
+    # 要被排除在解析之外的视图名称列表，⽤逗号分隔
+    excluded-view-names:
+    # 要运⽤于模板之上的模板模式。另⻅ StandardTemplate-ModeHandlers( 默认值： HTML5)
+    mode: HTML5
+    # 在构建 URL 时添加到视图名称前的前缀（默认值： classpath:/templates/ ）
+    prefix: classpath:/templates/
+    # 在构建 URL 时添加到视图名称后的后缀（默认值： .html ）
+    suffix: .html

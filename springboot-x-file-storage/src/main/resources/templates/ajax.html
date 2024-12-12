@@ -1,0 +1,89 @@
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta name="generator" content="editplus" />
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>jquery发送ajax请求</title>
+
+</head>
+
+<body>
+<style>
+    #div_one {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #123
+    }
+</style>
+<div>
+    <h2>
+        发送jq ajax的请求
+    </h2>
+    <button>get</button>
+    <button>post</button>
+    <button>通用型方法ajax</button>
+    <div id="div_one"></div>
+
+</div>
+
+<script>
+    //get请求发送
+    const divone = document.getElementById("div_one")
+    $('button').eq(0).click(function() {
+        //$.get("url","data参数"，'回调函数'，响应体类型)
+        $.get('http://127.0.0.1:8000/jq', {
+            name: '周杰伦',
+            age: '41'
+        }, function(data) {
+            console.log(data)
+            $("#div_one").html(data.name + data.age)
+        }, "json")
+    })
+
+    //post
+    $('button').eq(1).click(function() {
+        //$.get("url","data参数"，'回调函数')
+        $.post('http://127.0.0.1:8000/jq', {
+            name: '周杰伦',
+            age: '41'
+        }, function(data) {
+            console.log(data)
+            //  $("#div_one").html(data.name) //jq方法
+            divone.innerHTML = data.age + data.name //js方法
+        }, "json")
+    })
+
+    //AJax请求方法
+    $('button').eq(2).click(function() {
+        $.ajax({
+            //url
+            url: 'http://127.0.0.1:8000/jq',
+            //参数
+            data: {
+                a: 100,
+                b: 100
+            },
+            //请求类型
+            type: 'GET',
+            //响应体类型
+            dataType: 'json',
+            //成功的回调
+            success: function(data) {
+                console.log(data)
+                $("#div_one").html(data.name + data.age)
+            },
+            //超时时间
+            timeout: 2000,
+            //失败的回调
+            error: function() {
+                console.log("出错了")
+                $("#div_one").html("出错了")
+            }
+        })
+    })
+</script>
+</body>
+</html>

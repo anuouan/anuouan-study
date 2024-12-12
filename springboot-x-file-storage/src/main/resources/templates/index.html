@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Good Thymes Virtual Grocery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- 引入jQuery库 -->
+    <!--    <script src="/static/js/jquery-3.7.1.min.js"></script>-->
+    <!--    <link rel="stylesheet" th:href="@{/static/lib/layui/css/layui.css}" media="all">-->
+    <!--    <link rel="stylesheet" th:href="@{/static/css/login.css}" media="all">-->
+    <script th:src="@{/static/js/jquery-3.7.1.min.js}"></script>
+</head>
+<body>
+<form id="uploadForm" enctype="multipart/form-data">
+    <input type="text" id="username" name="username" placeholder="请输入用户名"><br>
+    <input type="file" id="fileInput" name="file" accept="image/*"><br>
+    <p id="displayField">显示的文本</p><br>
+    <object data="985-211-双一流大学目录164所.xlsx" type="application/xlsx" width="100%" height="100%">
+        该浏览器不支持PDF.请点击查看:
+        <a href="985-211-双一流大学目录164所.xlsx">Download PDF</a>.</p>
+    </object>
+
+    <iframe src='https://docs.google.com?src=985-211-双一流大学目录164所.xlsx' width='100%' height='100%' frameborder='1'>
+    </iframe>
+</form>
+<img id="previewImage" src="" alt="Image Preview" style="display:none;">
+<script type="text/javascript">
+    // 监听输入框的输入事件
+    $('#username').on('input', function () {
+        // 获取输入框的值
+        var inputValue = $('#username').val();
+        // 将输入框的值更新到段落中
+        $('#displayField').text(inputValue);
+    });
+
+
+    //图片上传
+    $("#fileInput").change(function () {
+        var files = $("#fileInput").get(0).files[0]; //获取file控件中的内容
+        var formData = new FormData();
+        formData.append("file", files);
+        console.log(formData);
+        $.ajax({
+            url: "/upload",
+            type: "post",
+            data: formData,
+            processData: false, // 告诉jQuery不要去处理发送的数据
+            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+            success: function (data) {
+                console.log("data:", data);
+                $("#previewImage").removeAttr("style").attr("src", data.data);
+            },
+            error: function (data) {
+                console.log("error:", data);
+            }
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>Simple example - Editor.md examples</title>
+    <link rel="stylesheet" href="/static/plugins/editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="/static/plugins/editormd/css/editormd.css" />
+    <style> #submit_button{ display:block; margin-left: 42%; margin-top: 2em; margin-bottom: 2em; } .input{ display: block; margin-left: 20%; } </style>
+</head>
+<body>
+<div id="layout">
+    <div id="my-editormd" >
+        <textarea id="my-editormd-markdown-doc" name="my-editormd-markdown-doc" style="display:none;"></textarea>
+        <!-- 注意：name属性的值-->
+        <textarea id="my-editormd-html-code" name="my-editormd-html-code" style="display:none;"></textarea>
+    </div>
+    <img src="/static/images/1.jpg">
+    <button class="button button-block button-rounded button-action button-large" id="submit_button">确认提交</button>
+
+</div>
+<script src="/static/plugins/editormd/editormd.js"></script>
+<script type="text/javascript"> <!--为了让editor.md编辑器完整的显示出来--> var testEditor; $(function() {
+    testEditor = editormd("my-editormd", { width : "90%", height : 640, syncScrolling : "single", path : "/static/plugins/editormd/lib/", saveHTMLToTextarea : true }); }); <!--然后用ajax将编辑器中的md格式的数据提交到后台，存储在数据库中，有的人可能存储的是html格式的，也行，这个看你自己的选择了，不过存储.md格式还是要好一点--> $("#submit_button").click(function () { $.ajax({ type: "post", url: "", data: { content:$("#my-editormd-html-code").val(), }, contentType: "application/x-www-form-urlencoded; charset=utf-8", dataType: "json", success: function (data) { }, error:function () { } }); }); </script>
+</body>
+</html>
