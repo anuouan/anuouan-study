@@ -62,6 +62,6 @@ class FileStorageServiceBigFileTest {
         Assert.notNull(fileInfo, "大文件上传失败！");
         log.info("大文件上传成功：{}", fileInfo.toString());
 
-        fileStorageService.delete(fileInfo);
+//        fileStorageService.delete(fileInfo);
     }
 }
